@@ -1,4 +1,4 @@
-const socket=io()
+const socket = io();
 
 // socket.on("xyz",(count)=>{
 //     console.log("Updated",count)
@@ -12,15 +12,14 @@ const socket=io()
 //     socket.emit("increment")
 // })
 
+socket.on("message", (msg) => {
+  console.log(msg);
+});
 
-socket.on("message",(msg)=>{
-    console.log(msg)
-})
+document.querySelector("#mess").addEventListener("submit", (e) => {
+  e.preventDefault();
 
-document.querySelector("#mess").addEventListener("submit",(e)=>{
-    e.preventDefault();
+  const msg = document.querySelector("input").value;
 
-    const msg=document.querySelector("input").value
-
-    socket.emit("send-msg",msg)
-})
+  socket.emit("send-msg", msg);
+});
