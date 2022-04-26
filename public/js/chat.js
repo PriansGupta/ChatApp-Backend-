@@ -12,5 +12,15 @@ const socket=io()
 //     socket.emit("increment")
 // })
 
-const msg=document.querySelector("input").value
 
+socket.on("message",(msg)=>{
+    console.log(msg)
+})
+
+document.querySelector("#mess").addEventListener("submit",(e)=>{
+    e.preventDefault();
+
+    const msg=document.querySelector("input").value
+
+    socket.emit("send-msg",msg)
+})
