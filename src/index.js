@@ -1,23 +1,22 @@
 const path = require("path");
 const express = require("express");
-const http=require("http")
-const socketio=require("socket.io")
-
+const http = require("http");
+const socketio = require("socket.io");
 
 const app = express();
-const server=http.createServer(app)
-const io=socketio(server)
+const server = http.createServer(app);
+const io = socketio(server);
 
-const port=process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
-const publicDirectoryPath=path.join(__dirname,"../public")
+const publicDirectoryPath = path.join(__dirname, "../public");
 
-app.use(express.static(publicDirectoryPath))
+app.use(express.static(publicDirectoryPath));
 
-io.on("connection",()=>{
-    console.log("New WebSocket Connection")
-})
+io.on("connection", () => {
+  console.log("New WebSocket Connection");
+});
 
-server.listen(port,()=>{
-    console.log("Server is Up on "+port+"!")
-})
+server.listen(port, () => {
+  console.log("Server is Up on " + port + "!");
+});
