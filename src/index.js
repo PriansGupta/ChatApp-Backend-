@@ -17,16 +17,22 @@ io.on("connection", (socket) => {
   console.log("New WebSocket Connection");
 
   socket.emit("message", "Welcome");
-  socket.broadcast.emit("message","New user joined");
-
+  socket.broadcast.emit("message", "New user joined");
 
   socket.on("send-msg", (msg) => {
     io.emit("message", msg);
   });
 
-  socket.on("disconnect",()=>{
-      io.emit("message","A user has left!")
-  })
+  socket.on("disconnect", () => {
+    io.emit("message", "A user has left!");
+  });
+
+  socket.on("Send-Location", (coords) => {
+    io.emit(
+      "message",
+      `https://google.com/maps?q=${coords.latitude},${coords.longitude}`
+    );
+  });
 });
 
 server.listen(port, () => {
