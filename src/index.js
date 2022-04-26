@@ -17,10 +17,16 @@ io.on("connection", (socket) => {
   console.log("New WebSocket Connection");
 
   socket.emit("message", "Welcome");
+  socket.broadcast.emit("message","New user joined");
+
 
   socket.on("send-msg", (msg) => {
     io.emit("message", msg);
   });
+
+  socket.on("disconnect",()=>{
+      io.emit("message","A user has left!")
+  })
 });
 
 server.listen(port, () => {
