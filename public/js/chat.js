@@ -1,18 +1,22 @@
+let msg = document.querySelector("input");
+const mess_temp = document.querySelector("#mess-temp").innerHTML;
+const messages = document.querySelector("#messages");
 const socket = io();
 
 socket.on("message", (msg) => {
   console.log(msg);
+  const html=Mustache.render(mess_temp,{
+      messages:msg
+  })
 });
 
 document.querySelector("#mess").addEventListener("submit", (e) => {
   e.preventDefault();
 
-  let msg = document.querySelector("input");
-  const mess_temp = document.querySelector("#mess-temp");
-  const messages = document.querySelector("#messages");
 
   socket.emit("send-msg", msg.value, () => {
     console.log("Message Delivered");
+
     msg.value = "";
   });
 });
