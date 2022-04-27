@@ -7,10 +7,11 @@ socket.on("message", (msg) => {
 document.querySelector("#mess").addEventListener("submit", (e) => {
   e.preventDefault();
 
-  const msg = document.querySelector("input").value;
+  let msg = document.querySelector("input");
 
-  socket.emit("send-msg", msg,()=>{
+  socket.emit("send-msg", msg.value,()=>{
       console.log("Message Delivered")
+      msg.value="";
   });
 });
 
