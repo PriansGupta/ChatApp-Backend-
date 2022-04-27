@@ -1,5 +1,6 @@
 let msg = document.querySelector("input");
 const mess_temp = document.querySelector("#mess-temp").innerHTML;
+const loca_temp = document.querySelector("#location-temp").innerHTML;
 const messages = document.querySelector("#messages");
 const socket = io();
 
@@ -14,6 +15,11 @@ socket.on("message", (msg) => {
 
 socket.on("shareLocation",(url)=>{
     console.log(url)
+    const html=Mustache.render(loca_temp,{
+        url
+    })
+  messages.insertAdjacentHTML("beforeend",html)
+
 })
 
 document.querySelector("#mess").addEventListener("submit", (e) => {
