@@ -8,7 +8,7 @@ document.querySelector("#mess").addEventListener("submit", (e) => {
   e.preventDefault();
 
   let msg = document.querySelector("input");
-
+    const mess_temp=document.querySelector("#mess-temp")
   socket.emit("send-msg", msg.value,()=>{
       console.log("Message Delivered")
       msg.value="";
