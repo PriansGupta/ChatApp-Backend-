@@ -9,7 +9,9 @@ document.querySelector("#mess").addEventListener("submit", (e) => {
 
   const msg = document.querySelector("input").value;
 
-  socket.emit("send-msg", msg);
+  socket.emit("send-msg", msg,()=>{
+      console.log("Message Delivered")
+  });
 });
 
 
