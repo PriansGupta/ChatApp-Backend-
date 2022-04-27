@@ -16,7 +16,7 @@ socket.on("message", (msg) => {
 socket.on("shareLocation", (url) => {
   console.log(url);
   const html = Mustache.render(loca_temp, {
-    url,
+    url:url,
   });
   messages.insertAdjacentHTML("beforeend", html);
 });
