@@ -8,24 +8,28 @@ document.querySelector("#mess").addEventListener("submit", (e) => {
   e.preventDefault();
 
   let msg = document.querySelector("input");
-    const mess_temp=document.querySelector("#mess-temp")
-  socket.emit("send-msg", msg.value,()=>{
-      console.log("Message Delivered")
-      msg.value="";
+  const mess_temp = document.querySelector("#mess-temp");
+  const messages = document.querySelector("#messages");
+
+  socket.emit("send-msg", msg.value, () => {
+    console.log("Message Delivered");
+    msg.value = "";
   });
 });
 
+document.querySelector("#location").addEventListener("click", () => {
+  if (!navigator.geolocation) return alert("Not Supported");
 
-document.querySelector("#location").addEventListener("click",()=>{
-    if(!navigator.geolocation)
-    return alert("Not Supported")
-
-    navigator.geolocation.getCurrentPosition((position)=>{
-    socket.emit("Send-Location",{
-        latitude:position.coords.latitude,
-        longitude:position.coords.longitude,
-    },()=>{
-        console.log("Location Sent")
-    })
-    })
-})
+  navigator.geolocation.getCurrentPosition((position) => {
+    socket.emit(
+      "Send-Location",
+      {
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+      },
+      () => {
+        console.log("Location Sent");
+      }
+    );
+  });
+});
