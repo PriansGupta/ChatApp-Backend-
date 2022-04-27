@@ -8,7 +8,13 @@ socket.on("message", (msg) => {
   const html=Mustache.render(mess_temp,{
       messages:msg
   })
+
+  messages.insertAdjacentHTML("beforeend",html)
 });
+
+socket.on("shareLocation",(url)=>{
+    console.log(url)
+})
 
 document.querySelector("#mess").addEventListener("submit", (e) => {
   e.preventDefault();
