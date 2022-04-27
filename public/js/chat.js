@@ -6,25 +6,23 @@ const socket = io();
 
 socket.on("message", (msg) => {
   console.log(msg);
-  const html=Mustache.render(mess_temp,{
-      messages:msg
-  })
+  const html = Mustache.render(mess_temp, {
+    messages: msg,
+  });
 
-  messages.insertAdjacentHTML("beforeend",html)
+  messages.insertAdjacentHTML("beforeend", html);
 });
 
-socket.on("shareLocation",(url)=>{
-    console.log(url)
-    const html=Mustache.render(loca_temp,{
-        url
-    })
-  messages.insertAdjacentHTML("beforeend",html)
-
-})
+socket.on("shareLocation", (url) => {
+  console.log(url);
+  const html = Mustache.render(loca_temp, {
+    url,
+  });
+  messages.insertAdjacentHTML("beforeend", html);
+});
 
 document.querySelector("#mess").addEventListener("submit", (e) => {
   e.preventDefault();
-
 
   socket.emit("send-msg", msg.value, () => {
     console.log("Message Delivered");
