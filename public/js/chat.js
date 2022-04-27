@@ -23,6 +23,8 @@ document.querySelector("#location").addEventListener("click",()=>{
     socket.emit("Send-Location",{
         latitude:position.coords.latitude,
         longitude:position.coords.longitude,
+    },()=>{
+        console.log("Location Sent")
     })
     })
 })

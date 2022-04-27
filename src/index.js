@@ -19,19 +19,22 @@ io.on("connection", (socket) => {
   socket.emit("message", "Welcome");
   socket.broadcast.emit("message", "New user joined");
 
-  socket.on("send-msg", (msg) => {
+  socket.on("send-msg", (msg,callback) => {
     io.emit("message", msg);
+    callback();
   });
 
   socket.on("disconnect", () => {
     io.emit("message", "A user has left!");
   });
 
-  socket.on("Send-Location", (coords) => {
+  socket.on("Send-Location", (coords,callback) => {
     io.emit(
       "message",
       `https://google.com/maps?q=${coords.latitude},${coords.longitude}`
     );
+
+    callback();
   });
 });
 
